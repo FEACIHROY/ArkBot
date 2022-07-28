@@ -44,6 +44,9 @@ public class RouletteService {
                 replayInfo.setMuted(60);
                 //replayInfo.setMuted((new Random().nextInt(5) + 1) * 60);
                 replayInfo.setReplayMessage("对不起，我也不想这样的......");
+
+                //String Name = messageInfo.getName();
+
                 this.rouletteMapper.cleanRoulette();
             }else {
                 switch (trigger){

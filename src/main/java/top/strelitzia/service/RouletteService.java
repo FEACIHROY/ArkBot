@@ -7,13 +7,18 @@ import top.angelinaBot.annotation.AngelinaGroup;
 import top.angelinaBot.model.MessageInfo;
 import top.angelinaBot.model.ReplayInfo;
 import top.strelitzia.dao.RouletteMapper;
+import top.strelitzia.dao.UserFoundMapper;
 import top.strelitzia.model.RouletteInfo;
+import top.strelitzia.model.UserFoundInfo;
 
 @Service
 public class RouletteService {
 
     @Autowired
     private RouletteMapper rouletteMapper;
+
+    @Autowired
+    private UserFoundMapper userFoundMapper;
 
     @AngelinaGroup(keyWords = {"给轮盘上子弹","上膛","拔枪吧"}, description = "守护铳轮盘赌，看看谁是天命之子")
     public ReplayInfo Roulette(MessageInfo messageInfo) {
@@ -40,13 +45,16 @@ public class RouletteService {
         if (bullet == 6){
             replayInfo.setReplayMessage("您还没上子弹呢");
         }else {
-            if(bullet > trigger){
+            if(bullet > trigger) {
                 replayInfo.setMuted(60);
                 //replayInfo.setMuted((new Random().nextInt(5) + 1) * 60);
-                replayInfo.setReplayMessage("对不起，我也不想这样的......");
 
-                //String Name = messageInfo.getName();
+                String name = messageInfo.getName();
+                long qq = messageInfo.getQq();
+                UserFoundInfo userFoundInfo = userFoundMapper.selectUserFoundByQQ(qq);
+                userFoundMapper.updateDeathByQQ(qq);
 
+                replayInfo.setReplayMessage(name + "，这是你吃的第" + userFoundInfo.getDeath()+1 + "颗子弹了，快去打复活赛吧");
                 this.rouletteMapper.cleanRoulette();
             }else {
                 switch (trigger){

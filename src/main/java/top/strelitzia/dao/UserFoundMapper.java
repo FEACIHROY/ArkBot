@@ -31,4 +31,9 @@ public interface UserFoundMapper {
     Integer selectTodaySearchByQQ(Long qq);
 
     List<Long> selectCakeGroups(@Param("uid") Long uid);
+
+    Integer updateDeathByQQ(@Param("qq") Long qq);
+
+
+
 }

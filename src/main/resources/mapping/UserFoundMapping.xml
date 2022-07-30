@@ -8,13 +8,15 @@
         <result column="all_count" property="allCount" jdbcType="INTEGER"/>
         <result column="all_six" property="allSix" jdbcType="INTEGER"/>
         <result column="all_five" property="allFive" jdbcType="INTEGER"/>
+        <result column="death" property="death" jdbcType="INTEGER"/>
     </resultMap>
 
     <!--  根据qq查询抽卡信息  -->
     <select id="selectUserFoundByQQ" resultMap="BaseResultMap">
-        select qq,found_count,today_count,all_count,all_six,all_five
+        select qq,found_count,today_count,all_count,all_six,all_five,death
         from a_user_found WHERE qq = #{qq}
     </select>
+
 
     <select id="selectTodaySearchByQQ" resultType="java.lang.Integer">
         SELECT search from a_user_found WHERE qq = #{qq} LIMIT 1
@@ -33,6 +35,19 @@
         today_count = today_count + 1,
         all_count = all_count + 1
     </update>
+
+
+    <update id="updateDeathByQQ">
+        INSERT INTO a_user_found (
+            qq ,
+            death
+        )
+        VALUES
+            (#{qq}, 1) ON CONFLICT(qq)
+        DO update set
+        death = death + 1
+    </update>
+
 
     <update id="updateFiveByQq">
         INSERT INTO a_user_found (

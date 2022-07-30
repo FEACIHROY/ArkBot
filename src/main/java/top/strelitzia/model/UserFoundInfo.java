@@ -12,6 +12,7 @@ public class UserFoundInfo {
     private Integer allCount;
     private Integer allSix;
     private Integer allFive;
+    private Integer death;
 
     public Long getQq() {
         return qq;
@@ -59,5 +60,13 @@ public class UserFoundInfo {
 
     public void setAllFive(Integer allFive) {
         this.allFive = allFive;
+    }
+
+    public Integer getDeath() {
+        return death;
+    }
+
+    public void setDeath(Integer death) {
+        this.death = death;
     }
 }

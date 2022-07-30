@@ -54,7 +54,7 @@ public class RouletteService {
                 UserFoundInfo userFoundInfo = userFoundMapper.selectUserFoundByQQ(qq);
                 userFoundMapper.updateDeathByQQ(qq);
 
-                replayInfo.setReplayMessage(name + "，这是你吃的第" + userFoundInfo.getDeath()+1 + "颗子弹了，快去打复活赛吧");
+                replayInfo.setReplayMessage(name + "，这是你吃的第" + userFoundInfo.getDeath() + "颗子弹了，快去打复活赛吧");
                 this.rouletteMapper.cleanRoulette();
             }else {
                 switch (trigger){

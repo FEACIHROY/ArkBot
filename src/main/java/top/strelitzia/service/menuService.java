@@ -19,6 +19,13 @@ public class menuService {
     public ReplayInfo menu(MessageInfo messageInfo) {
         ReplayInfo replayInfo = new ReplayInfo(messageInfo);
         replayInfo.setReplayImg(new File("runFile/menu/menu.jpg"));
+        return replayInfo;
+    }
+
+    //@AngelinaGroup(keyWords = {"我有一个朋友"}, description = "我有一个朋友")
+    public ReplayInfo friend(MessageInfo messageInfo) {
+        ReplayInfo replayInfo = new ReplayInfo(messageInfo);
+
 
         return replayInfo;
     }

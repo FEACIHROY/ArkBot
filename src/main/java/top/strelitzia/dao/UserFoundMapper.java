@@ -24,6 +24,9 @@ public interface UserFoundMapper {
     //查询某人的今日抽卡数，垫刀数
     UserFoundInfo selectUserFoundByQQ(Long qq);
 
+    //查詢某人的qq，用于“我有一个朋友”
+    UserFoundInfo selectUserInfoByName(String name);
+
     //清空每日抽卡次数
     Integer cleanTodayCount();
 

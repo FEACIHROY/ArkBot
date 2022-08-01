@@ -22,6 +22,11 @@
         SELECT search from a_user_found WHERE qq = #{qq} LIMIT 1
     </select>
 
+    <select id="selectUserInfoByName" resultMap="BaseResultMap">
+        SELECT qq from a_user_found WHERE name = #{name} LIMIT 1
+
+    </select>
+
     <!--  插入新qq，若已存在，则更新垫刀数和今日抽卡次数  -->
     <update id="updateUserFoundByQQ">
         INSERT INTO a_user_found (qq, name, found_count, group_id, today_count ,all_count)

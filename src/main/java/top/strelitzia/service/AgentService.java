@@ -139,7 +139,6 @@ public class AgentService {
             userFoundInfo.setTodayCount(0);
         }
         //去数据库中查询这个人的垫刀数
-        Integer sum = userFoundInfo.getFoundCount();
         //今日抽卡数
         Integer today = userFoundInfo.getTodayCount();
         List<AdminUserInfo> admins = adminUserMapper.selectAllAdmin();
@@ -148,6 +147,8 @@ public class AgentService {
         if (today + 100 <= limit || b) {
             //如果没输入卡池名或者卡池不存在
             for(int i = 0;i < 10;i++) {
+                UserFoundInfo update = userFoundMapper.selectUserFoundByQQ(messageInfo.getQq());
+                Integer sum = update.getFoundCount();
                 if (pool == null || agentMapper.selectPoolIsExit(pool).size() == 0) {
                     pool = "常规";
                 }

@@ -122,6 +122,51 @@ public class AgentService {
         return replayInfo;
     }
 
+    @AngelinaGroup(keyWords = {"百连寻访"}, description = "图片百连模拟抽卡")
+    public ReplayInfo bailian(MessageInfo messageInfo) throws IOException {
+        ReplayInfo replayInfo = new ReplayInfo(messageInfo);
+        List<String> args = messageInfo.getArgs();
+        String pool = "常规";
+        if (args.size() > 1) {
+            pool = args.get(1);
+        }
+        UserFoundInfo userFoundInfo = userFoundMapper.selectUserFoundByQQ(messageInfo.getQq());
+        Integer limit = groupAdminInfoService.getGroupFoundAdmin(messageInfo.getGroupId());
+        if (userFoundInfo == null) {
+            userFoundInfo = new UserFoundInfo();
+            userFoundInfo.setQq(messageInfo.getQq());
+            userFoundInfo.setFoundCount(0);
+            userFoundInfo.setTodayCount(0);
+        }
+        //去数据库中查询这个人的垫刀数
+        Integer sum = userFoundInfo.getFoundCount();
+        //今日抽卡数
+        Integer today = userFoundInfo.getTodayCount();
+        List<AdminUserInfo> admins = adminUserMapper.selectAllAdmin();
+        replayInfo.setReplayMessage(messageInfo.getName());
+        boolean b = AdminUtil.getFoundAdmin(messageInfo.getQq(), admins);
+        if (today + 100 <= limit || b) {
+            //如果没输入卡池名或者卡池不存在
+            for(int i = 0;i < 10;i++) {
+                if (pool == null || agentMapper.selectPoolIsExit(pool).size() == 0) {
+                    pool = "常规";
+                }
+                String s = FoundAgentByNum(10, pool, messageInfo.getQq(), sum, messageInfo.getName(), messageInfo.getGroupId());
+                s = s.replace(" ", "");
+
+                BufferedImage image = drawPicByFound(s);
+                if (image != null) {
+                    replayInfo.setReplayImg(image);
+                } else {
+                    replayInfo.setReplayMessage(s);
+                }
+            }
+        }else {
+                replayInfo.setReplayMessage("今日抽卡机会不足");
+        }
+        return replayInfo;
+    }
+
     @AngelinaGroup(keyWords = {"卡池", "卡池列表"}, description = "展示现有所有卡池")
     public ReplayInfo selectPool(MessageInfo messageInfo) {
         String pool = "";

@@ -74,5 +74,20 @@ public class menuService {
         return replayInfo;
     }
 
+    @AngelinaGroup(keyWords = {"常用网站"}, description = "常用网站")
+    public ReplayInfo web(MessageInfo messageInfo) {
+        ReplayInfo replayInfo = new ReplayInfo(messageInfo);
+        replayInfo.setReplayMessage("1、素材掉率统计、刷图规划： https://penguin-stats.cn/"
+                                    + "\n2、公招查询、刷图规划、干员精英/专辑材料查询： https://arkn.lolicon.app/#/hr"
+                                    + "\n3、明日方舟Wiki： https://prts.wiki/w/%E9%A6%96%E9%A1%B5"
+                                    + "\n4、地图查询： https://map.ark-nights.com/"
+                                    + "\n5、寻访数据查询： https://arkgacha.kwer.top/"
+                                    + "\n6、明日方舟官网： https://ak.hypergryph.com/"
+                                    + "\n7、肉鸽官网： https://ak.hypergryph.com/is/crimsonsolitaire"
+                                    + "\n8、终末地官网： https://endfield.hypergryph.com/"
+                                    + "\n9、塞壬唱片官网： https://monster-siren.hypergryph.com/");
+        return replayInfo;
+    }
+
 
 }

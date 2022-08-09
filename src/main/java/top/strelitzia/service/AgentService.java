@@ -349,11 +349,11 @@ public class AgentService {
                     agentList = agentMapper.selectAgentByStar("常规", star);
                     if (limit == 1 || limit == 4) {
                         //如果是限定池，就再加上前期可歪的限定干员
-                        agentList.addAll(agentMapper.selectLimitAgent(limit));
+                        //agentList.addAll(agentMapper.selectLimitAgent(limit));
                         //五倍权值（因为上面加过一个，所以再加四个就可以）
                         List<AgentInfo> fiveLimit = agentMapper.selectLimitAgentByPool(pool);
                         if (fiveLimit.size() > 0) {
-                            for (int i = 0; i < 4; i++) {
+                            for (int i = 0; i < 5; i++) {
                                 agentList.addAll(fiveLimit);
                             }
                         }
@@ -459,11 +459,6 @@ public class AgentService {
             g.drawImage(bImage, 81 + No * 82, 320, 60, 60, null);
             No++;
         }
-        /*g.setFont(new Font("楷体", Font.BOLD, 20));
-        g.setColor(Color.WHITE);
-        g.drawString("结果仅供参考，详细代码请见：", 470, 420);
-        g.drawString("http://www.angelina-bot.top/", 470, 440);
-        g.dispose();*/
         return image;
     }
 }

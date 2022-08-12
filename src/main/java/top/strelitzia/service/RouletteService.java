@@ -46,7 +46,7 @@ public class RouletteService {
             replayInfo.setReplayMessage("您还没上子弹呢");
         }else {
             if(bullet > trigger) {
-                replayInfo.setMuted(60);
+                //replayInfo.setMuted(60);
                 //replayInfo.setMuted((new Random().nextInt(5) + 1) * 60);
 
                 String name = messageInfo.getName();
@@ -186,7 +186,7 @@ public class RouletteService {
             //把获取到的禁言QQ带入禁言功能并且实现禁言
 
             String Name = Bot.getInstance(messageInfo.getLoginQq()).getGroup(messageInfo.getGroupId()).get(Qq).getNameCard();
-            replayInfo.setMuted(5 * 60);
+            //replayInfo.setMuted(5 * 60);
             replayInfo.setReplayMessage(Name + "，永别了，安息吧勇士......");
             this.rouletteMapper.cleanRouletteDuel();
         }
